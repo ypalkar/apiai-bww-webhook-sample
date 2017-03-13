@@ -68,13 +68,14 @@ def makeWebhookResult(result):
     print("Inside makeWebhookResult")
     try:
       resp = ''.join(str(v) for v in result)
+      listPrice=resp.split(":",1)[1][1:-3]
+		speech = "your amount for current order is " + listPrice
     except Exception as e: print(e)
 	 
     if resp is None:
         return {}
 
-    listPrice=resp.split(":",1)[1][1:-3]
-    speech = "your amount for current order is " + listPrice
+    
     print("Response:")
     print(speech)
 
