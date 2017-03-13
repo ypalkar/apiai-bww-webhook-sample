@@ -67,7 +67,7 @@ def makebwwQuery(req):
 def makeWebhookResult(result):
     print("Inside makeWebhookResult")
     try:
-      test2 = ''.join(str(v) for v in result)
+      resp = ''.join(str(v) for v in result)
     except Exception as e: print(e)
 	 
     if resp is None:
