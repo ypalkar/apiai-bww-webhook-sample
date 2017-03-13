@@ -29,7 +29,7 @@ def webhook():
     res = processRequest(req)
 
     res = json.dumps(res, indent=4)
-    # print(res)
+    print(res)
     r = make_response(res)
     r.headers['Content-Type'] = 'application/json'
     return r
@@ -37,9 +37,10 @@ def webhook():
 
 def processRequest(req):
     if req.get("result").get("action") != "chatbotFoodService":
-		print("Inside chatbotFoodService doesn't match")
-    return {}
+		  return {}
+    print(req.get("result").get("action"))
     baseurl = "http://alexav2.cloudhub.io/alexa/products?"
+    print(req.get("result").get("action"))
     bww_query = makebwwQuery(req)
     print("bww_query :- "+ bww_query)
     if bww_query is None:
