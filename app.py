@@ -50,13 +50,7 @@ def processRequest(req):
     print(bww_url)
     result = urlopen(bww_url).read()
     print("Result :- "+result)
-    try:
-      data = json.loads(result)
-    except Exception as e:
-      traceback.print_exc()
-    
-    print(" data :-"+data)
-    res = makeWebhookResult(data)
+    res = makeWebhookResult(result)
     return res
 
 
@@ -70,8 +64,9 @@ def makebwwQuery(req):
     
 
 
-def makeWebhookResult(data):
-    listPrice = data.get('listPrice')
+def makeWebhookResult(result):
+    print("Inside makeWebhookResult")
+    listPrice = result.get('listPrice')
     print("listPrice:- "+ listPrice)
     if listPrice is None:
         return {}
