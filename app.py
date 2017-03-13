@@ -49,7 +49,11 @@ def processRequest(req):
     print(bww_url)
     result = urlopen(bww_url).read()
     print("Result :- "+result)
-    data = json.loads(result)
+    try:
+      data = json.loads(result)
+    except ValueError as e:
+      print(e)
+    
     print(" data :-"+data)
     res = makeWebhookResult(data)
     return res
