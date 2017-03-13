@@ -58,7 +58,7 @@ def makebwwQuery(req):
     product = parameters.get("product") 
     quantity= parameters.get("quantity")
     productType= parameters.get("type")
-    return "productName="+product+"quantityName="+quantity+"productType="+productType 
+    return "productName="+product+"&quantityName="+quantity+"&productType="+productType 
     
 
 
