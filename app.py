@@ -49,7 +49,6 @@ def processRequest(req):
     bww_url = baseurl + bww_query
     print(bww_url)
     result = urlopen(bww_url).read()
-    print("Result :- "+result)
     res = makeWebhookResult(result)
     return res
 
@@ -67,9 +66,9 @@ def makebwwQuery(req):
 def makeWebhookResult(result):
     print("Inside makeWebhookResult")
     try:
-      resp = ''.join(str(v) for v in result)
+      resp = json.loads(result)
       print("resp is  " + resp)
-      listPrice=resp.split(":",1)
+      listPrice=test2[0]['listPrice']
       print("listPrice is  " + resp)
       speech = "your amount for current order is " + listPrice
     except Exception as e: print(e)
