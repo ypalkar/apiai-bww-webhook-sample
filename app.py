@@ -10,6 +10,7 @@ from urllib.error import HTTPError
 
 import json
 import os
+import traceback
 
 from flask import Flask
 from flask import request
@@ -51,8 +52,8 @@ def processRequest(req):
     print("Result :- "+result)
     try:
       data = json.loads(result)
-    except ValueError as e:
-      print(e)
+    except Exception as e:
+      traceback.print_exc()
     
     print(" data :-"+data)
     res = makeWebhookResult(data)
