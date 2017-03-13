@@ -38,7 +38,7 @@ def webhook():
 def processRequest(req):
     if req.get("result").get("action") != "chatbotFoodService":
         return {}
-    baseurl = "http://oamp-alexa-v2.cloudhub.io/alexa/products?"
+    baseurl = "http://alexav2.cloudhub.io/alexa/products?"
     bww_query = makebwwQuery(req)
     if bww_query is None:
         return {}
