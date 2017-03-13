@@ -52,15 +52,16 @@ def processRequest(req):
 def makebwwQuery(req):
     result = req.get("result")
     parameters = result.get("parameters")
-    product = parameters.get("product")
+    product = parameters.get("product") 
     quantity= parameters.get("quantity")
-	return "productName="+product+"quantityName="+quantity+"productType="+parameters.get("type");
-    #return "select * from weather.forecast where woeid in (select woeid from geo.places(1) where text='" + city + "')"
+    productType= parameters.get("type")
+    return "productName="+product+"quantityName="+quantity+"productType="+productType 
+    
 
 
 def makeWebhookResult(data):
     listPrice = data.get('listPrice')
-    if query is None:
+    if listPrice is None:
         return {}
 
     speech = "your amount for current order is " + listPrice
