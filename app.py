@@ -68,7 +68,7 @@ def makeWebhookResult(result):
     try:
       resp = json.loads(result)
       #print("resp is  " + resp)
-      listPrice=test2[0]['listPrice']
+      listPrice=resp[0]['listPrice']
       print("listPrice is  " + listPrice)
       speech = "your amount for current order is " + listPrice
     except Exception as e: print(e)
