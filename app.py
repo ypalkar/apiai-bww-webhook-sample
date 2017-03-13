@@ -54,8 +54,8 @@ def makebwwQuery(req):
     parameters = result.get("parameters")
     product = parameters.get("product")
     quantity= parameters.get("quantity")
-	type=parameters.get("type")
-	return "productName="+product+"quantityName="+quantity+"productType="+type;
+	productType=parameters.get("type")
+	return "productName="+product+"quantityName="+quantity+"productType="+productType;
     #return "select * from weather.forecast where woeid in (select woeid from geo.places(1) where text='" + city + "')"
 
 
