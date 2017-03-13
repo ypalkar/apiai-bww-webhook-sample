@@ -46,7 +46,9 @@ def processRequest(req):
     if bww_query is None:
         return {}
     bww_url = baseurl + bww_query
+    print(bww_url)
     result = urlopen(bww_url).read()
+    print("Result :- "+result)
     data = json.loads(result)
     res = makeWebhookResult(data)
     return res
