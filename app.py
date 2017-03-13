@@ -50,6 +50,7 @@ def processRequest(req):
     result = urlopen(bww_url).read()
     print("Result :- "+result)
     data = json.loads(result)
+    print(" data :-"+data)
     res = makeWebhookResult(data)
     return res
 
@@ -66,6 +67,7 @@ def makebwwQuery(req):
 
 def makeWebhookResult(data):
     listPrice = data.get('listPrice')
+    print("listPrice:- "+ listPrice)
     if listPrice is None:
         return {}
 
