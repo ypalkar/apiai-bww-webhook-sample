@@ -66,11 +66,12 @@ def makebwwQuery(req):
 
 def makeWebhookResult(result):
     print("Inside makeWebhookResult")
-    listPrice = result.get('listPrice')
-    print("listPrice:- "+ listPrice)
-    if listPrice is None:
+    resp="".join(result)
+	 
+    if resp is None:
         return {}
 
+    listPrice=resp.split(":",1)[1][1:-3]
     speech = "your amount for current order is " + listPrice
     print("Response:")
     print(speech)
