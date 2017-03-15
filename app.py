@@ -31,6 +31,9 @@ def webhook():
     if req.get("result").get("action") =="chatbotFoodService":
       print("Inside chatbotFoodService")
       res = processRequest(req)
+    elif req.get("result").get("action") =="myloyalityService":
+      print("Inside myloyalityService")
+      res = processLoyaltyRequest(req)
     else:
       print("Inside promo")
       res= processPromotionRequest(req)
@@ -68,6 +71,19 @@ def processRequest(req):
     print(bww_url)
     result = urlopen(bww_url).read()
     res = makeWebhookResult(result)
+    return res
+	
+def processLoyaltyRequest(req):
+    print(req.get("result").get("action"))
+    if req.get("result").get("action") != "myloyalityService":
+        return {}
+    result = req.get("result")
+    parameters = result.get("parameters")
+	
+    baseurl = "http://ec2-54-219-170-150.us-west-1.compute.amazonaws.com:8080/alexa/mcdonalds/memberPoints?memberID="+parameters.get("memberid")
+    print("baseURL :- " + baseurl)
+    result = urlopen(baseurl).read()
+    res = makeLoyalWebhookResult(result)
     return res
 
     
@@ -127,6 +143,24 @@ def makePromoWebhookResult(result):
         "source": "apiai-chatFoodOrder-webhook-master"
     }
 	
+def makeLoyalWebhookResult(result):
+    print("Inside makeLoyalWebhookResult")
+    try:
+      resp = json.loads(result)
+      speech = "You currently have"+ resp[0]['loyaltyPoints'] +" loyalty points. \n Thanks for being a loyal member of our family. To redeem points, please visit any participating restaurant."
+    
+    except Exception as e: print(e)
+    
+    
+    print("Speech is "+speech)
+    return {
+        "speech": speech,
+        "displayText": speech,
+        # "data": data,
+        # "contextOut": [],
+        "source": "apiai-chatFoodOrder-webhook-master"
+    }
+
 	
 if __name__ == '__main__':
     port = int(os.getenv('PORT', 5000))
