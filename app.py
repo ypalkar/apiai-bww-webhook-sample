@@ -34,9 +34,9 @@ def webhook():
     else:
       print("Inside promo")
       res= processPromotionRequest(req)
-
+    print("before json dumps " + res)
     res = json.dumps(res, indent=4)
-    print(res)
+    print("After json dumps" + res)
     r = make_response(res)
     r.headers['Content-Type'] = 'application/json'
     return r
@@ -115,14 +115,9 @@ def makePromoWebhookResult(result):
       speech = "Here are our current promotions. Our first promotion is"+ resp[0]['promoName'] + resp[0]['promoDescr'] +"Our second promotion is" + resp[0]['promoName'] + resp[0]['promoDescr'] +". Please visit your nearest restaurant for more information."
     
     except Exception as e: print(e)
-	 
-    if resp is None:
-        return {}
-
     
     
     print("Speech is "+speech)
-
     return {
         "speech": speech,
         "displayText": speech,
