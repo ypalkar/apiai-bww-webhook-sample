@@ -34,7 +34,7 @@ def webhook():
     else:
       print("Inside promo")
       res= processPromotionRequest(req)
-    print("before json dumps " + res)
+    
     res = json.dumps(res, indent=4)
     print("After json dumps" + res)
     r = make_response(res)
