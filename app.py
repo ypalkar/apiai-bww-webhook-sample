@@ -113,7 +113,7 @@ def makePromoWebhookResult(result):
     print("Inside makePromoWebhookResult")
     try:
       resp = json.loads(result)
-      speech = "Here are our current promotions. Our first promotion is"+ resp[0]['promoName'] + resp[0]['promoDescr'] +"Our second promotion is" + resp[0]['promoName'] + resp[0]['promoDescr'] +". Please visit your nearest restaurant for more information."
+      speech = "Here are our current promotions. Our first promotion is"+ resp[0]['promoName'] + resp[0]['promoDescr'] +"\n Our second promotion is" + resp[1]['promoName'] + resp[1]['promoDescr'] +". \n Please visit your nearest restaurant for more information."
     
     except Exception as e: print(e)
     
