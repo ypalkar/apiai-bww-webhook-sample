@@ -51,6 +51,7 @@ def processPromotionRequest(req):
   result = urlopen(baseurl).read()
   print("promotion recieved")
   res = makePromoWebhookResult(result)
+  return res
     
 def processRequest(req):
     print(req.get("result").get("action"))
@@ -69,7 +70,7 @@ def processRequest(req):
     res = makeWebhookResult(result)
     return res
 
-    return res
+    
 
 def makebwwQuery(req):
     result = req.get("result")
