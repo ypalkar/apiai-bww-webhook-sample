@@ -25,11 +25,14 @@ def webhook():
     req = request.get_json(silent=True, force=True)
 
     print("Request:")
+	print(req.get("result").get("action"))
     print(json.dumps(req, indent=4))
 
     if req.get("result").get("action") =="chatbotFoodService":
+		print("Inside chatbotFoodService")
 	    res = processRequest(req)
     else:
+		print("Inside promo")
 	    res= processPromotionRequest(req)
 
     res = json.dumps(res, indent=4)
@@ -40,7 +43,8 @@ def webhook():
 
 
 def processPromotionRequest(req):
-    if req.get("result").get("action") != "chatbotFoodService":
+    print(req.get("result").get("action"))
+	if req.get("result").get("action") != "promotionService":
         return {}
     print(req.get("result").get("action"))
     baseurl = "http://alexav2.cloudhub.io/alexa/products?"
