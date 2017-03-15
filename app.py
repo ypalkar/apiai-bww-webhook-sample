@@ -27,7 +27,10 @@ def webhook():
     print("Request:")
     print(json.dumps(req, indent=4))
 
-    res = processRequest(req)
+    if req.get("result").get("action") =="chatbotFoodService":
+	    res = processRequest(req)
+    else:
+	    res= processPromotionRequest(req)
 
     res = json.dumps(res, indent=4)
     print(res)
@@ -36,9 +39,9 @@ def webhook():
     return r
 
 
-def processRequest(req):
+def processPromotionRequest(req):
     if req.get("result").get("action") != "chatbotFoodService":
-		  return {}
+        return {}
     print(req.get("result").get("action"))
     baseurl = "http://alexav2.cloudhub.io/alexa/products?"
     print(req.get("result").get("action"))
@@ -52,6 +55,15 @@ def processRequest(req):
     res = makeWebhookResult(result)
     return res
 
+def processRequest(req):
+    if req.get("result").get("action") != "promotionService":
+		      return {}
+    print(req.get("result").get("action"))
+    baseurl = "http://ec2-54-219-170-150.us-west-1.compute.amazonaws.com:8080/alexa/getStorePromotions?storeId=4829CA"
+    print(req.get("result").get("action"))
+    result = urlopen(baseurl).read()
+    res = makePromoWebhookResult(result)
+    return res
 
 def makebwwQuery(req):
     result = req.get("result")
@@ -89,6 +101,29 @@ def makeWebhookResult(result):
     }
 
 
+	
+def makePromoWebhookResult(result):
+    print("Inside makePromoWebhookResult")
+    try:
+      resp = json.loads(result)
+      speech = "Here are our current promotions. Our first promotion is"+ resp[0]['promoName'] + resp[0]['promoDescr'] +"Our second promotion is" + resp[0]['promoName'] + resp[0]['promoDescr'] +". Please visit your nearest restaurant for more information."
+    
+    except Exception as e: print(e)
+	 
+    if resp is None:
+        return {}
+
+    
+    
+    print("Speech is "+speech)
+
+    return {
+        "speech": speech,
+        "displayText": speech,
+        # "data": data,
+        # "contextOut": [],
+        "source": "apiai-chatFoodOrder-webhook-master"
+    }
 if __name__ == '__main__':
     port = int(os.getenv('PORT', 5000))
 
