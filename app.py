@@ -43,8 +43,18 @@ def webhook():
 
 
 def processPromotionRequest(req):
+  print(req.get("result").get("action"))
+  if req.get("result").get("action") != "promotionService":
+		      return {}
+  baseurl = "http://ec2-54-219-170-150.us-west-1.compute.amazonaws.com:8080/alexa/getStorePromotions?storeId=4829CA"
+  print(baseurl)
+  result = urlopen(baseurl).read()
+  print("promotion recieved")
+  res = makePromoWebhookResult(result)
+    
+def processRequest(req):
     print(req.get("result").get("action"))
-    if req.get("result").get("action") != "promotionService":
+    if req.get("result").get("action") != "chatbotFoodService":
         return {}
     print(req.get("result").get("action"))
     baseurl = "http://alexav2.cloudhub.io/alexa/products?"
@@ -59,14 +69,6 @@ def processPromotionRequest(req):
     res = makeWebhookResult(result)
     return res
 
-def processRequest(req):
-    if req.get("result").get("action") != "promotionService":
-		      return {}
-    print(req.get("result").get("action"))
-    baseurl = "http://ec2-54-219-170-150.us-west-1.compute.amazonaws.com:8080/alexa/getStorePromotions?storeId=4829CA"
-    print(req.get("result").get("action"))
-    result = urlopen(baseurl).read()
-    res = makePromoWebhookResult(result)
     return res
 
 def makebwwQuery(req):
