@@ -177,8 +177,8 @@ def makeLoyalWebhookResult(result):
         "source": "apiai-chatFoodOrder-webhook-master"
     }
 
-def makeLoyalWebhookResult(result):
-    print("Inside makeLoyalWebhookResult")
+def makeDrinkWebhookResult(result):
+    print("Inside makeDrinkWebhookResult")
     try:
       resp = json.loads(result)
       speech = ""
