@@ -34,9 +34,9 @@ def webhook():
     elif req.get("result").get("action") =="myloyalityService":
       print("Inside myloyalityService")
       res = processLoyaltyRequest(req)
-	elif req.get("result").get("action") =="mydrinksService":
-		print("Inside myloyalityService")
-		res = processDrinksRequest(req)
+    elif req.get("result").get("action") =="mydrinksService":
+      print("Inside myloyalityService")
+      res = processDrinksRequest(req)
     else:
       print("Inside promo")
       res= processPromotionRequest(req)
@@ -184,12 +184,11 @@ def makeLoyalWebhookResult(result):
       speech = ""
     
     except Exception as e: print(e)
-    
-	for item in resp:
-	if item['beverageDesc'] is None:
-		print("")
-	else:
-		speech=speech +item['beverageName']+ "       " + item['beverageDesc'] +" \n")
+    for item in resp:
+      if item['beverageDesc'] is None:
+        print("")
+      else:
+        speech=speech +item['beverageName']+ "       " + item['beverageDesc'] +" \n"
 
     
     print("Speech is "+speech)
