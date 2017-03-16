@@ -34,6 +34,9 @@ def webhook():
     elif req.get("result").get("action") =="myloyalityService":
       print("Inside myloyalityService")
       res = processLoyaltyRequest(req)
+	elif req.get("result").get("action") =="mydrinksService":
+		print("Inside myloyalityService")
+		res = processDrinksRequest(req)
     else:
       print("Inside promo")
       res= processPromotionRequest(req)
@@ -44,6 +47,19 @@ def webhook():
     r.headers['Content-Type'] = 'application/json'
     return r
 
+
+	
+	
+def processDrinksRequest(req):
+  print(req.get("result").get("action"))
+  if req.get("result").get("action") != "mydrinksService":
+		      return {}
+  baseurl = "http://ec2-54-219-170-150.us-west-1.compute.amazonaws.com:8080/alexa/products/beverages/tap?beverageType=Tap"
+  print(baseurl)
+  result = urlopen(baseurl).read()
+  print("drinks recieved")
+  res = makeDrinkWebhookResult(result)
+  return res
 
 def processPromotionRequest(req):
   print(req.get("result").get("action"))
@@ -160,6 +176,32 @@ def makeLoyalWebhookResult(result):
         # "contextOut": [],
         "source": "apiai-chatFoodOrder-webhook-master"
     }
+
+def makeLoyalWebhookResult(result):
+    print("Inside makeLoyalWebhookResult")
+    try:
+      resp = json.loads(result)
+      speech = ""
+    
+    except Exception as e: print(e)
+    
+	for item in resp:
+	if item['beverageDesc'] is None:
+		print("")
+	else:
+		speech=speech +item['beverageName']+ "       " + item['beverageDesc'] +" \n")
+
+    
+    print("Speech is "+speech)
+    return {
+        "speech": speech,
+        "displayText": speech,
+        # "data": data,
+        # "contextOut": [],
+        "source": "apiai-chatFoodOrder-webhook-master"
+    }
+
+
 
 	
 if __name__ == '__main__':
