@@ -47,15 +47,14 @@ def webhook():
     r.headers['Content-Type'] = 'application/json'
     return r
 
-@app.route('/getRegisteredUsers', methods=['POST'])
+@app.route('/getRegisteredUsers', methods=['GET'])
 def webhook():
-    req = request.get_json(silent=True, force=True)
-
-    baseurl = "http://ec2-54-219-170-150.us-west-1.compute.amazonaws.com:8084/getRegisteredUsers"
+    
+	baseurl = "http://ec2-54-219-170-150.us-west-1.compute.amazonaws.com:8084/getRegisteredUsers"
 	result = urlopen(baseurl).read()
 	r = make_response(result)
-    r.headers['Content-Type'] = 'application/json'
-    return r
+	r.headers['Content-Type'] = 'application/json'
+	return r
 
 	
 	
