@@ -48,7 +48,7 @@ def webhook():
     return r
 
 @app.route('/getRegisteredUsers', methods=['GET'])
-def webhook():
+def getRegisteredUsers():
     
 	baseurl = "http://ec2-54-219-170-150.us-west-1.compute.amazonaws.com:8084/getRegisteredUsers"
 	result = urlopen(baseurl).read()
