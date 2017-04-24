@@ -52,6 +52,7 @@ def getRegisteredUsers():
     
 	baseurl = "http://ec2-54-219-170-150.us-west-1.compute.amazonaws.com:8084/getRegisteredUsers"
 	result = urlopen(baseurl).read()
+	print("Executed Rest Call"+result);
 	r = make_response(result)
 	r.headers['Content-Type'] = 'application/json'
 	return r
