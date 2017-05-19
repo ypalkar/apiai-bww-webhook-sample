@@ -61,9 +61,9 @@ def getRegisteredUsers():
 @app.route('/getHelloMessage', methods=['GET'])
 def getHelloMessage():
     
-	result = "Hello I am TIBCO"
+	result = "Hello I am from TIBCO"
 	r = make_response(result)
-	r.headers['Content-Type'] = 'application/json'
+	r.headers['Content-Type'] = 'application/text'
 	return r
 
 	
