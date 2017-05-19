@@ -63,7 +63,7 @@ def getHelloMessage():
     
 	result = "Hello I am TIBCO"
 	r = make_response(result)
-	r.headers['Content-Type'] = 'application/text'
+	r.headers['Content-Type'] = 'application/json'
 	return r
 
 	
