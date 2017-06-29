@@ -50,7 +50,7 @@ def webhook():
 @app.route('/getRegisteredUsers', methods=['GET'])
 def getRegisteredUsers():
     
-	baseurl = "http://ec2-54-219-170-150.us-west-1.compute.amazonaws.com:8084/getRegisteredUsers"
+	baseurl = "http://ec2-54-183-130-113.us-west-1.compute.amazonaws.com:8084/getRegisteredUsers"
 	result = urlopen(baseurl).read()
 	print("Executed Rest Call"+result);
 	r = make_response(result)
@@ -72,7 +72,7 @@ def processDrinksRequest(req):
   print(req.get("result").get("action"))
   if req.get("result").get("action") != "mydrinksService":
 		      return {}
-  baseurl = "http://ec2-54-219-170-150.us-west-1.compute.amazonaws.com:8080/alexa/products/beverages/tap?beverageType=Tap"
+  baseurl = "http://ec2-54-183-130-113.us-west-1.compute.amazonaws.com:8080/alexa/products/beverages/tap?beverageType=Tap"
   print(baseurl)
   result = urlopen(baseurl).read()
   print("drinks recieved")
@@ -83,7 +83,7 @@ def processPromotionRequest(req):
   print(req.get("result").get("action"))
   if req.get("result").get("action") != "promotionService":
 		      return {}
-  baseurl = "http://ec2-54-219-170-150.us-west-1.compute.amazonaws.com:8080/alexa/getStorePromotions?storeId=4829CA"
+  baseurl = "http://ec2-54-183-130-113.us-west-1.compute.amazonaws.com:8080/alexa/getStorePromotions?storeId=4829CA"
   print(baseurl)
   result = urlopen(baseurl).read()
   print("promotion recieved")
@@ -114,7 +114,7 @@ def processLoyaltyRequest(req):
     result = req.get("result")
     parameters = result.get("parameters")
 	
-    baseurl = "http://ec2-54-219-170-150.us-west-1.compute.amazonaws.com:8080/alexa/mcdonalds/memberPoints?memberID="+parameters.get("memberid")
+    baseurl = "http://ec2-54-183-130-113.us-west-1.compute.amazonaws.com:8080/alexa/mcdonalds/memberPoints?memberID="+parameters.get("memberid")
     print("baseURL :- " + baseurl)
     result = urlopen(baseurl).read()
     res = makeLoyalWebhookResult(result)
