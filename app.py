@@ -58,6 +58,17 @@ def getRegisteredUsers():
 	return r
 	
 	
+@app.route('/getSailorUsers', methods=['GET'])
+def getRegisteredUsers():
+    
+	baseurl = "http://ec2-54-183-130-113.us-west-1.compute.amazonaws.com:8084/api/sailorProfile/view"
+	result = urlopen(baseurl).read()
+	print("Executed Rest Call"+result);
+	r = make_response(result)
+	r.headers['Content-Type'] = 'application/json'
+	return r
+	
+	
 @app.route('/getHelloMessage', methods=['GET'])
 def getHelloMessage():
     
