@@ -59,7 +59,7 @@ def getRegisteredUsers():
 	
 	
 @app.route('/getSailorUsers', methods=['GET'])
-def getRegisteredUsers():
+def getSailorUsers():
     
 	baseurl = "http://ec2-54-183-130-113.us-west-1.compute.amazonaws.com:8084/api/sailorProfile/view"
 	result = urlopen(baseurl).read()
