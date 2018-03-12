@@ -25,8 +25,9 @@ def webhook():
     req = request.get_json(silent=True, force=True)
 
     print("Request:")
-    print(req.get("result").get("action"))
     print(json.dumps(req, indent=4))
+    print(req.get("result").get("action"))
+    
 
     if req.get("result").get("action") =="chatbotFoodService":
       print("Inside chatbotFoodService")
